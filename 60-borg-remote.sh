@@ -12,6 +12,7 @@ $REPOSITORY::'{hostname}-{now:%Y-%m-%d}' \
 /etc \
 /var/spool/cron/crontabs \
 /var/backups \
+/var/www \
 /root \
 /home \
 /usr/local/bin \
