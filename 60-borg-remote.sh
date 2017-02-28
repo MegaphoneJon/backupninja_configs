@@ -13,6 +13,7 @@ $REPOSITORY::'{hostname}-{now:%Y-%m-%d}' \
 /var/spool/cron/crontabs \
 /var/backups \
 /var/www \
+/var/log \
 /root \
 /home \
 /usr/local/bin \
@@ -31,7 +32,7 @@ info $OUTPUT
 
 # Remove old backups.
 OUTPUT=$( (
-borg prune -v $REPOSITORY --prefix '{hostname}-' --keep-daily=7 --keep-weekly=4 --keep-monthly=6
+borg prune -v $REPOSITORY --prefix '{hostname}-' --keep-daily=15 --keep-weekly=9 --keep-monthly=6
 ) 2>&1)
 if [ $? -ne 0 ]
   then
