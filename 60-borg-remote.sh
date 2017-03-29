@@ -2,12 +2,15 @@
 # borg backupninja backup script
 REPOSITORY=
 export BORG_PASSPHRASE=''
+# On rsync.net: Specify /usr/local/bin/borg/borg for borg 0.29; /usr/local/bin/borg1 for 1.0.9
+REMOTE_PATH=/usr/local/bin/borg1/borg1
 
 info "Starting borg backup"
 
 # Run the backup.
 OUTPUT=$( (
 borg create --verbose --stats  --progress --compression lz4         \
+--remote-path $REMOTE_PATH \
 $REPOSITORY::'{hostname}-{now:%Y-%m-%d}' \
 /etc \
 /var/spool/cron/crontabs \
@@ -32,7 +35,7 @@ info $OUTPUT
 
 # Remove old backups.
 OUTPUT=$( (
-borg prune -v $REPOSITORY --prefix '{hostname}-' --keep-daily=15 --keep-weekly=9 --keep-monthly=6
+borg prune -v $REPOSITORY --prefix '{hostname}-' --keep-daily=15 --keep-weekly=9 --keep-monthly=6 --remote-path $REMOTE_PATH
 ) 2>&1)
 if [ $? -ne 0 ]
   then
@@ -42,7 +45,7 @@ info $OUTPUT
 
 # Check the integrity of the backup.
 OUTPUT=$( (
-borg check $REPOSITORY
+borg check $REPOSITORY --remote-path $REMOTE_PATH
 ) 2>&1)
 if [ $? -ne 0 ]
   then
