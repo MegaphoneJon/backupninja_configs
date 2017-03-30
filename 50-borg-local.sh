@@ -10,7 +10,7 @@ OUTPUT=$( (
 borg create --verbose --stats  --progress --compression lz4         \
 $REPOSITORY::'{hostname}-{now:%Y-%m-%d}' \
 /etc \
-/var/spool/cron/crontabs \
+/var/spool/cron \
 /var/backups \
 /var/www \
 /var/log \
