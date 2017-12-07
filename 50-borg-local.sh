@@ -20,9 +20,9 @@ $REPOSITORY::'{hostname}-{now:%Y-%m-%d}' \
 /usr/local/sbin \
 /var/lib/dpkg/status \
 /var/lib/dpkg/status-old \
---exclude /home/*/.steam/steam/steamapps/common/ \
---exclude /home/*/.cache \
---exclude /home/*/.mozilla/firefox/*/Cache
+--exclude '/home/*/.steam/steam/steamapps/common/' \
+--exclude '/home/*/.cache' \
+--exclude '/home/*/.mozilla/firefox/*/Cache'
 ) 2>&1)
 if [ $? -ne 0 ] 
   then
